@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
-const book=require('../model/book_model');
+const Borrower=require('../model/borrower_model');
 
-//Antaa kaikki kirjat
+//Antaa kaikki lainaajat
 router.get('/', 
     function(request, response) {
-        book.getAllBooks(function(err, dbResult){
+        Borrower.getAllBorrowers(function(err, dbResult){
             if(err){
                 response.json(err);
             }
@@ -16,12 +16,12 @@ router.get('/',
         });
 });
 
-//Antaa yhden kirjan
+//Antaa yhden lainaajan
 router.get('/:id',
     function(request, response){
         let id=request.params.id;
         console.log(id);
-        book.getOneBook(id, function(err,dbResult){
+        Borrower.getOneBorrower(id, function(err,dbResult){
             if(err){
                 response.json(err);
             }
@@ -32,10 +32,10 @@ router.get('/:id',
     }
 );
 
-//Lisää kirjan
+//Lisää lainaajan
 router.post('/',
     function(request,response){
-        book.addBook(request.body,function(err,dbResult){
+        Borrower.addBorrower(request.body,function(err,dbResult){
             if(err){
                 response.json(err);
             }
@@ -47,11 +47,11 @@ router.post('/',
     }
 );
 
-//Päivittää kirjan
+//Päivittää lainaajan
 router.put('/:id',
     function(request,response){
         let id=request.params.id;
-        book.updateBook(id,request.body,function(err,dbResult){
+        Borrower.updateBorrower(id,request.body,function(err,dbResult){
             if(err){
                 response.json(err);
             }
@@ -62,11 +62,11 @@ router.put('/:id',
     }
 );
 
-//Poistaa kirjan
+//Poistaa lainaajan
 router.delete('/:id',
     function(request,response){
         let id=request.params.id;
-        book.deleteBook(id,function(err,dbResult){
+        Borrower.deleteBorrower(id,function(err,dbResult){
             if(err){
                 response.json(err);
             }
